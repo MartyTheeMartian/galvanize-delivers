@@ -29,6 +29,11 @@ var pCon = true;
 var rCon = true;
 var iCon = true;
 
+var sub = document.getElementById('sub');
+var tax = document.getElementById('tax');
+var total = document.getElementById('total');
+
+
 var food = document.getElementById('food');
 food.addEventListener("click", function(event) {
 
@@ -111,23 +116,44 @@ food.addEventListener("click", function(event) {
     tr.appendChild(td3);
     iCon = false;
   }
-  else if (rCount > 1) {
+  else if (iCount > 1) {
     var td2 = document.getElementById('iNum');
     td2.innerText = iCount;
   }
 
   var subTotal = (bCount * 8.99) + (pCount * 11.99) + (rCount * 14.99) + (iCount * 7.99);
 
-  var sub = document.getElementById('sub');
+
   sub.innerText = "$" + subTotal.toFixed(2);
 
   var taxS = subTotal * 0.0875;
-  var tax = document.getElementById('tax');
   tax.innerText = "$" + taxS.toFixed(2);
 
   var totalS = subTotal + taxS;
-  var total = document.getElementById('total');
   total.innerText = "$" + totalS.toFixed(2);
+
+});
+
+// Reset Order
+var reset = document.getElementById("reset");
+reset.addEventListener("click", function() {
+  bCount = 0;
+  pCount = 0;
+  rCount = 0;
+  iCount = 0;
+  bCon = true;
+  rCon = true;
+  pCon = true;
+  iCon = true;
+
+  var body = document.getElementById("body");
+  while(body.firstChild) {
+    body.removeChild(body.firstChild);
+  }
+
+  sub.innerText = "";
+  tax.innerText = "";
+  total.innerText = "";
 
 });
 
